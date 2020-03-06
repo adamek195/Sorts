@@ -1,5 +1,5 @@
-#ifndef quicksort_hpp
-#define quicksort_hpp
+#ifndef mergesort_hpp
+#define mergesort_hpp
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -7,7 +7,7 @@
 
 
 template<class T>
-void quickSort(T data[],int right, int left);
+void mergeSort(T data[],int right, int left);
 
 template<class T>
 void showState(T data[]);
