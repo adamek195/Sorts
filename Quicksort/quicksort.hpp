@@ -3,12 +3,12 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#define SIZE 1000
+#define SIZE 1000000
 
 
-template<class T>
-void quickSort(T data[],int right, int left);
+template<typename T>
+void quickSort(T data[],int leftIndex,int rightIndex);
 
-template<class T>
+template<typename T>
 void showState(T data[]);
 #endif

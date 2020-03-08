@@ -3,12 +3,15 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#define SIZE 1000
+#define SIZE 10
 
 
-template<class T>
-void mergeSort(T data[],int right, int left);
+template<typename T>
+void mergeSort(T data[],T extraArray[],int leftIndex, int rightIndex);
 
-template<class T>
+template<typename T>
+void merge(T data[],T extraArray[],int leftIndex,int middleIndex,int rightIndex);
+
+template<typename T>
 void showState(T data[]);
 #endif

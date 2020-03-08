@@ -1,6 +1,6 @@
 #include "quicksort.hpp"
 
-template<class T>
+template<typename T>
 void showState(T data[])
 {
     std::cout << "Our tables look like this: " << std::endl;
@@ -11,17 +11,17 @@ void showState(T data[])
 
 }
 
-template<class T>
-void quickSort(T data[],int left,int right)
+template<typename T>
+void quickSort(T data[],int leftIndex,int rightIndex)
 {
     int i,j,tmp,pivot; // zmienne potrzebne do obsugi algorytmu 
 
-    i=(left+right)/2; //wyznaczamy pivot na środku
+    i=(leftIndex+rightIndex)/2; //wyznaczamy pivot na środku
     pivot = data[i];
-    data[i] = data[right]; // przesuwamy srodkowy element na koniec
+    data[i] = data[rightIndex]; // przesuwamy srodkowy element na koniec
 
     //wracamy na poczatek tablicy z indeksem
-    for(j=i=left; i< right; i++)
+    for(j=i=leftIndex; i< rightIndex; i++)
     {
         //spradzamy czy elementy sa mniejsze od piwota
         if(data[i]<pivot)
@@ -34,14 +34,13 @@ void quickSort(T data[],int left,int right)
         }
     }
 
-    data[right] = data[j];
+    data[rightIndex] = data[j];
     data[j] = pivot;
 
-    if(left < j-1)
-
-        quickSort(data,left,j-1);
-    if(j+1 < right)
-        quickSort(data,j+1,right);
+    if(leftIndex < j-1)
+        quickSort(data,leftIndex,j-1);
+    if(j+1 < rightIndex)
+        quickSort(data,j+1,rightIndex);
 }
 
 
@@ -50,7 +49,7 @@ int main ()
 {
     srand(time(NULL));
 
-    int tab[SIZE];
+    int* tab = new int [SIZE];
 
     for(int i =0; i<SIZE;i++)
     {
@@ -58,7 +57,9 @@ int main ()
     }
 
     showState(tab);
+    /*tu musi byc ta jedynka*/
     quickSort(tab,0,SIZE-1);
     showState(tab);
+    delete [] tab;
     return 0;
 }
