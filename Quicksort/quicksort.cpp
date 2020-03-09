@@ -14,7 +14,8 @@ void showState(T data[])
 template<typename T>
 void quickSort(T data[],int leftIndex,int rightIndex)
 {
-    int i,j,tmp,pivot; // zmienne potrzebne do obsugi algorytmu 
+    int i,j;
+    T tmp,pivot; // zmienne potrzebne do obsugi algorytmu 
 
     i=(leftIndex+rightIndex)/2; //wyznaczamy pivot na środku
     pivot = data[i];
