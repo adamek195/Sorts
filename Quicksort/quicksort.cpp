@@ -1,4 +1,7 @@
 #include "quicksort.hpp"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 template<typename T>
 void showState(T data[])

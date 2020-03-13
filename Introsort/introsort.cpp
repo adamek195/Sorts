@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #include "introsort.hpp"
-#define SIZE 1000
 
 template<typename T>
 void showState(T data[])
