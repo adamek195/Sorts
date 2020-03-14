@@ -146,27 +146,3 @@ void introSort( T data[], int firstIndex, int lastIndex, int maxDepth )
         introSort( data, border+1, lastIndex, maxDepth-1 );
     }
 }
-
-
-int main()
-{
-    srand(time(NULL));
-
-    int* tab = new int [SIZE];
-
-    for(int i =0; i<SIZE;i++)
-    {
-        tab[i] = rand();
-    }
-
-    int n = sizeof(tab) / sizeof(tab);
-    // pobierz maximum depth
-	int maxdepth = log(n) * 2;
-
-    showState(tab);
-    introSort(tab,0,SIZE,maxdepth);
-    showState(tab);
-    delete [] tab;
-
-    return 0;
-}

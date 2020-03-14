@@ -1,5 +1,5 @@
 #include "mergesort.hpp"
-
+#include <iostream>
 
 template<typename T>
 void showState(T data[] )
@@ -64,25 +64,4 @@ void mergeSort(T data[],T extraArray[], int leftIndex, int rightIndex)
         //metoda scalujaca dwie posortowane juz tablice
         merge(data,extraArray, leftIndex, middle, rightIndex);
     }
-}
-
-
-
-int main()
-{
-    srand(time(NULL));
-
-    int* tab = new int[SIZE];
-    int* extraArray = new int[SIZE];
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        tab[i] = rand();
-    }
-    showState(tab);
-    mergeSort(tab,extraArray, 0, SIZE - 1);
-    showState(tab);
-    delete[] tab;
-    delete[] extraArray;
-    return 0;
 }

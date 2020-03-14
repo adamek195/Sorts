@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#define SIZE 10
+#define SIZE 1000
 
 
 template<typename T>
