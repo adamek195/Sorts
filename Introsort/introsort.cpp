@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+#include <cmath>
 #include "introsort.hpp"
 
 template<typename T>
@@ -62,6 +64,83 @@ void heapSort(T data[],int length)
     }
 }
 
+/*sortowanie przez wstawanie*/
+template<typename T>
+void insertionSort (T data[], int length)
+{
+    /*zmienne potrzebne do obslugi algorytmu */
+    int i, j;
+    T tmp;
+    for (i=1; i<length; i++)
+    {
+        tmp=data[i];
+        for (j=i; j>0 && tmp<data[j-1]; j--)
+            data[j]=data[j-1];
+
+        data[j]=tmp;
+    }
+}
+
+template<typename T>
+int partitionArray(T data[], int leftIndex, int rightIndex)
+{
+    /*zmienna potrzebna do obslugi algorytmu*/
+    T tmp;
+    /*ustawiamy pivot na srodku */
+    int pivotIndex = leftIndex + (rightIndex - leftIndex)/2;
+    
+    /*srodkowa wartosc przesuwamy na ostatni element tablicy zeby mozna bylo porownac z kazdym elementem */
+    T pivotValue = data[pivotIndex];
+    tmp = data[pivotIndex];
+    data[pivotIndex] = data[rightIndex];
+    data[rightIndex] = tmp;
+    /*zmienne potrzebne do przejscia po elementach tablicy i wyznaczeniu granicy*/
+    int border = leftIndex - 1;
+    int i = leftIndex;
+
+    /*petla przechodzaca po tablicy i porownujaca elementy z pivotem oraz wyznaczajaca grancie */
+    while(i < rightIndex)
+    {
+        if(data[i] < pivotValue)
+        {
+            border++;
+            if(border != i)
+            {
+                tmp = data[i];
+                data[i] = data[border];
+                data[border] = tmp;
+            }
+        }
+        /*zwiekszamy iteracje */
+        i++;
+    }
+    /*sprawdzamy przypadek gdyby granica nie byla na koncu tablicy*/
+    border++;
+    if(border != rightIndex)
+    {
+        tmp = data[rightIndex];
+        data[rightIndex] = data[border];
+        data[border] = tmp;
+    }
+    return border;
+}
+
+template<typename T>
+void introSort( T data[], int firstIndex, int lastIndex, int maxDepth )
+{
+    if ( firstIndex < lastIndex )
+    {
+        if ( !maxDepth )
+        {
+            heapSort( data,lastIndex );
+            return;
+        }
+        int border = partitionArray( data, firstIndex, lastIndex);
+        introSort( data, firstIndex, border-1, maxDepth-1 );
+        introSort( data, border+1, lastIndex, maxDepth-1 );
+    }
+}
+
 
 int main()
 {
@@ -74,8 +153,12 @@ int main()
         tab[i] = rand();
     }
 
+    int n = sizeof(tab) / sizeof(tab);
+    // pobierz maximum depth
+	int maxdepth = log(n) * 2;
+
     showState(tab);
-    heapSort(tab,SIZE);
+    introSort(tab,0,SIZE,maxdepth);
     showState(tab);
     delete [] tab;
 
