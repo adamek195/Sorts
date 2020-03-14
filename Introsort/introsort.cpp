@@ -5,6 +5,8 @@
 #include <cmath>
 #include "introsort.hpp"
 
+
+/*funkcja wypisujaca tablice */
 template<typename T>
 void showState(T data[])
 {
@@ -16,6 +18,7 @@ void showState(T data[])
 
 }
 
+/*wyznaczanie najwiekszej wartosci na gore kopca */
 template<typename T>
 void validateMaxHeap(T data[],int heapSize,int parentIndex)
 {
@@ -43,6 +46,7 @@ void validateMaxHeap(T data[],int heapSize,int parentIndex)
     }      
 }
 
+/*sortowanie przez kopcowanie*/
 template<typename T>
 void heapSort(T data[],int length)
 {
@@ -81,6 +85,7 @@ void insertionSort (T data[], int length)
     }
 }
 
+/*podzielenie tablicy przez piwot tzw dziel i rzadz */
 template<typename T>
 int partitionArray(T data[], int leftIndex, int rightIndex)
 {
@@ -125,6 +130,7 @@ int partitionArray(T data[], int leftIndex, int rightIndex)
     return border;
 }
 
+/*sorotwanie introspektywne */
 template<typename T>
 void introSort( T data[], int firstIndex, int lastIndex, int maxDepth )
 {
