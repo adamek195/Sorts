@@ -1,13 +1,9 @@
-#ifndef quicksort_hpp
-#define quicksort_hpp
-#define SIZE 1000
+#ifndef sort_hpp
+#define sort_hpp
 
 class Sort
 {
     public:
-    /*definicja funkcji wypisujaca tablice */
-    template<typename T>
-    static void showState(T data[]);
     /*definicja funkcji ktora dzieli tablice wg piwota na dwie podtablice mniejsze i wieksze*/
     template<typename T>
     static int partitionArray(T data[], int leftIndex, int rightIndex);
@@ -34,20 +30,6 @@ class Sort
     static void insertionSort (T data[], int length);
 };
 
-
-
-
-/*funkcja wypisujaca tablice */
-template<typename T>
-void Sort::showState(T data[])
-{
-    std::cout << "Our tables look like this: " << std::endl;
-    for (int i=0; i<SIZE;i++)
-    {
-        std::cout <<i+1 <<"." << data[i] << std::endl; 
-    }
-
-}
 
 /*podzielenie tablicy przez piwot tzw dziel i rzadz */
 template<typename T>
