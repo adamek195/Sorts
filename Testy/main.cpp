@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <cmath>
 #include <chrono>
 #include <ratio>
@@ -16,14 +15,23 @@ int main()
     for(int i = 0; i< SIZE;i++)
         tab[i] = new int[length];
 
+    std::cout << "Podaj procent jaki ma byc tablicy posortowany: ";
+    /*procent*/
+    double perCent;
+    std::cin >> perCent;
+    std::cout << std::endl;    
+
+    /*wypelniamy tablice randomowymi liczbami */
     fillAray_random(tab,length);
+    showState(tab,length);
+    for(int i=0; i < SIZE; i++)
+        sortAray_percent(tab[i],length,perCent);
+    showState(tab,length);
 
     /*czas przed sorotwaniem algorytmu */
     auto time_start = std::chrono::high_resolution_clock::now();
-    showState(tab,length);
     for(int i = 0; i < SIZE; i++)
-        Sort::quickSort(tab[i],0,length-1);
-    showState(tab,length);    
+        Sort::quickSort(tab[i],0,length-1);    
     /*czas po sortowaniu algorytmu*/
     auto time_end = std::chrono::high_resolution_clock::now();
 
@@ -46,7 +54,6 @@ int main()
     /*uswanie dynamicznie zaalokowanej tablicy */
     for (int i = 0; i<SIZE; i++)
         delete [] tab[i];
-
     delete [] tab;
 
     return 0;
