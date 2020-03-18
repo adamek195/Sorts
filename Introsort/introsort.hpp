@@ -1,6 +1,6 @@
 #ifndef quicksort_hpp
 #define quicksort_hpp
-#define SIZE 10000
+#define SIZE 10
 
 template<typename T>
 void heapSort(T data[],int length);

@@ -25,7 +25,7 @@ void showState(T **data, int length)
 template<typename T>
 void fillAray_random(T **data,int length)
 {
-     srand(time(NULL));
+    srand(time(NULL));
 
     for(int j =0; j < SIZE; j++)
         for(int i = 0; i <length; i++)
@@ -40,9 +40,30 @@ void fillAray_reverse(T *data,int length)
 		std::swap(data[low], data[high]);
 }
 
-/*funkcja sortujaca tablice dla poszczegolnego procenta*/
+/*funkcja sortujaca tablice dla poszczegolnego procenta */
 template<typename T>
 void sortAray_percent(T *data,int length,double perCent)
+{
+    srand(time(NULL));
+    /*dlugosc tablicy ktorej procent chcemy posortowac */
+    int lengthPercent = perCent*length;
+     /*w celu posortowania tablicy uzyjemy algorytmu quicksort ktory jest najszybszy */
+    Sort::quickSort(data,0,lengthPercent-1);
+    for(int i = lengthPercent-1; i < length; i++)
+    {
+        if(data[i] < data[lengthPercent-1])
+        {
+            /*losuj dopoki elementy drugiej tablicy beda tylko wieksze od ostatniego elemntu podtablicy posortowanej */
+           
+            data[i] = rand()+data[lengthPercent-1];
+        }    
+    }  
+}
+
+
+/*funkcja sortujaca tablice dla poszczegolnego procenta pierwsza wersja zajmuje duzo pamieci*/
+template<typename T>
+void sortAray_percentSecond(T *data,int length,double perCent)
 {
     /*dlugosc tablicy ktorej procent chcemy posortowac */
     int lengthPercent = perCent*length;

@@ -16,6 +16,7 @@ int main()
     }
 
     int n = sizeof(tab) / sizeof(tab);
+    std::cout << n << std::endl;
     // pobierz maximum depth
 	int maxdepth = log(n) * 2;
 
