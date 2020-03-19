@@ -53,8 +53,7 @@ void sortAray_percent(T *data,int length,double perCent)
     {
         if(data[i] < data[lengthPercent-1])
         {
-            /*losuj dopoki elementy drugiej tablicy beda tylko wieksze od ostatniego elemntu podtablicy posortowanej */
-           
+            /*zmieniamy na wartosc wieksza od ostatniego elementu posortowanej podtablicy */
             data[i] = rand()+data[lengthPercent-1];
         }    
     }  
@@ -74,7 +73,7 @@ void sortAray_percentSecond(T *data,int length,double perCent)
         tmp[i] = data[i];  
     /*w celu posortowania tablicy uzyjemy algorytmu quicksort ktory jest najszybszy */
     Sort::quickSort(tmp,0,lengthPercent-1);  
-    /*posrtowane czesc tablicy przypisze sie calej tablicy */
+    /*posrtowane czesc tablicy przypisze sie calej tablicy*/
     for(int i = 0 ; i < lengthPercent; i++)
         data[i] = tmp[i];  
 

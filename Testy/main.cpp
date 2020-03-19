@@ -10,6 +10,7 @@ int main()
     int length;
     std::cout << "Podaj wielkosc: ";
     std::cin >> length;
+    std::cin.ignore(100000,'\n');
     /*tworzymy wiersze*/
     int** tab = new int *[SIZE];
     /*tworzymy kolumny dynamicznie */
@@ -27,6 +28,7 @@ int main()
     std::cout << "4. Zamyka menu." << std::endl;
     std::cout << "Twoj wybor to : ";
     std::cin >> choice_array;
+    std::cin.ignore(100000,'\n');
     switch(choice_array)
     {
         case 1:
@@ -40,6 +42,7 @@ int main()
             /*procent*/
             double perCent;
             std::cin >> perCent;
+            std::cin.ignore(100000,'\n');
             std::cout << std::endl;    
             /*wypelniamy tablice randomowymi liczbami */
             fillAray_random(tab,length);
@@ -70,7 +73,6 @@ int main()
         }
     }
 
-
     /*tworzymy zmienna do obslugi menu wyboru algorytmu */
     int choice_algorithm = 0;
     std::cout << "Wybierz algorytm ktory chcesz testowac: " << std::endl;
@@ -80,6 +82,7 @@ int main()
     std::cout << "4. Zamyka menu." << std::endl;
     std::cout << "Twoj wybor to: ";
     std::cin >> choice_algorithm;
+    std::cin.ignore(100000,'\n');
     switch(choice_algorithm)
     {
         /*obslugujacy algorytm quicksort*/
@@ -179,6 +182,7 @@ int main()
             break;
         }
     }    
+    
 
     /*uswanie dynamicznie zaalokowanej tablicy */
     for (int i = 0; i<SIZE; i++)
