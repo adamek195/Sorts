@@ -68,22 +68,142 @@ void heapSort(T data[],int length)
     }
 }
 
+/*funckja wymieniajaca dwa elementy tablicy wg indeksu potrzebna do introSorta*/
+template<typename T>
+void swapValue_Intro(T *a, T *b) 
+{ 
+    T *temp = a; 
+    a = b; 
+    b = temp; 
+    return; 
+} 
+
+
 /*sortowanie przez wstawanie*/
 template<typename T>
-void insertionSort (T data[], int length)
-{
-    /*zmienne potrzebne do obslugi algorytmu */
-    int i, j;
-    T tmp;
-    for (i=1; i<length; i++)
-    {
-        tmp=data[i];
-        for (j=i; j>0 && tmp<data[j-1]; j--)
-            data[j]=data[j-1];
+void InsertionSort_Intro(T data[], int *begin, int *end) 
+{ 
+    /*Pobierz lewy i prawy indeks tablicy cząstkowej do posortowania*/
+    int leftIndex = begin - data; 
+    int rightIndex = end - data; 
+  
+    for (int i = leftIndex+1; i <= rightIndex; i++) 
+    { 
+        int key = data[i]; 
+        int j = i-1; 
+  
+       /* Przesunąć elementy tablicy, które są większe od klucza,
+       na jedną pozycję przed ich aktualną pozycją*/
+        while (j >= leftIndex && data[j] > key) 
+        { 
+            data[j+1] = data[j]; 
+            j = j-1; 
+        } 
+        data[j+1] = key; 
+   } 
+  
+   return; 
+} 
 
-        data[j]=tmp;
-    }
-}
+/*Funkcja umożliwiająca partycjonowanie tablicy i zwrócenie punktu partycji*/
+template<typename T>
+int* Partition_Intro(T data[], int low, int high) 
+{ 
+    /*pivot*/
+    int pivot = data[high];    
+    /*Indeks mniejszego elementu*/ 
+    int i = (low - 1);
+    /*zmienna tymczasowa */ 
+    T tmp;
+    for (int j = low; j <= high- 1; j++) 
+    { 
+        /*Jeśli aktualny element jest mniejszy lub równy wychyleniu*/
+        if (data[j] <= pivot) 
+        { 
+            /*zwiekszaj o 1 indeks elementu mniejszego*/ 
+            i++; 
+            tmp =  data[i];
+            data[i] = data[j];
+            data[j] = tmp;
+        } 
+    } 
+    tmp =  data[i + 1];
+    data[i + 1] = data[high];
+    data[high] = tmp; 
+    return (data + i + 1); 
+} 
+
+/*Funkcja, która znajduje środek wartości wskazywanych
+przez wskaźniki a, b, c i zwraca ten wskaznik*/
+int *MedianOfThree(int * a, int * b, int * c) 
+{ 
+    if (*a < *b && *b < *c) 
+        return (b); 
+  
+    if (*a < *c && *c <= *b) 
+        return (c); 
+  
+    if (*b <= *a && *a < *c) 
+        return (a); 
+  
+    if (*b < *c && *c <= *a) 
+        return (c); 
+  
+    if (*c <= *a && *a < *b) 
+        return (a); 
+  
+    if (*c <= *b && *b <= *a) 
+        return (b); 
+} 
+
+
+/*IntroSort  wykonywanie wstępne*/
+template<typename T>
+void IntrosortUtil(T data[], T * begin, T * end, int depthLimit) 
+{ 
+    /*Policz liczbe elementow */
+    int size = end - begin; 
+  
+      /* jesli dlugosc jest mniejsza zrob sortowanie przez wstawianie*/ 
+    if (size < 16) 
+    { 
+        InsertionSort_Intro(data, begin, end); 
+        return; 
+    } 
+  
+    /* Jesli glebokosc wynienie 0 uzyj heapSort*/
+    if (depthLimit == 0) 
+    { 
+        heapSort(begin,size+1);
+        return; 
+    } 
+  
+    /*uzyj mediany trzech elementow zeby znalezc dobry pivot*/
+    int * pivot = MedianOfThree(begin, begin+size/2, end); 
+  
+    /* zamien pivot z koncowym elementem*/
+    swapValue_Intro(pivot, end); 
+  
+   /* podziel jak w  Quick Sort*/ 
+    int * partitionPoint = Partition_Intro(data, begin-data, end-data); 
+    IntrosortUtil(data, begin, partitionPoint-1, depthLimit - 1); 
+    IntrosortUtil(data, partitionPoint + 1, end, depthLimit - 1); 
+  
+    return; 
+} 
+
+
+/* Implementacja sortowania introspektywnego*/
+void introSort(int data[], int *begin, int *end) 
+{ 
+    int depthLimit = 2 * log(end-begin); 
+  
+    // Perform a recursive Introsort 
+    IntrosortUtil(data, begin, end, depthLimit); 
+  
+      return; 
+} 
+
 
 /*podzielenie tablicy przez piwot tzw dziel i rzadz */
 template<typename T>
@@ -130,19 +250,19 @@ int partitionArray(T data[], int leftIndex, int rightIndex)
     return border;
 }
 
-/*sorotwanie introspektywne */
-template<typename T>
-void introSort( T data[], int firstIndex, int lastIndex, int maxDepth )
+/*template<typename T>
+void introSort(T data[], int firstIndex,int lastIndex, int maxDepth)
 {
-    if ( firstIndex < lastIndex )
+    if(!maxDepth)
     {
-        if ( !maxDepth )
-        {
-            heapSort( data,lastIndex );
-            return;
-        }
+        int length = lastIndex - firstIndex + 1;
+        heapSort(data,lastIndex);
+        return;
+    }
+    else
+    {
         int border = partitionArray( data, firstIndex, lastIndex);
         introSort( data, firstIndex, border-1, maxDepth-1 );
         introSort( data, border+1, lastIndex, maxDepth-1 );
     }
-}
+}*/

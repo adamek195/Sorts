@@ -22,12 +22,15 @@ class Sort
     /*definicja algorytmu przez kopcowanie*/
     template<typename T>
     static void heapSort(T data[],int length);
+    /*definicja algorytmu sortowanie przez wstawianie */
+    template<typename T>
+    static void insertionSort(T *tab, int leftIndex, int rightIndex);
+    /*definicja funckji wypeniajace dwa elementy tablicy wedlug indeksu */
+    template<typename T>
+    static void introSortUtil(T data[], T * begin, T * end, int depthLimit);    
     /*definicja algorytmu introspektywnego*/
     template<typename T>
-    static void introSort( T data[], int firstIndex, int lastIndex, int maxDepth );
-    /*definicja algorytmu przez wstawianie*/
-    template<typename T>
-    static void insertionSort (T data[], int length);
+    static void introSort(T data[], T *begin, T *end); 
 };
 
 
@@ -204,39 +207,50 @@ void Sort::heapSort(T data[],int length)
     }
 }
 
-/* implementacja sorotwania introspektywnego */
+/*implementacja algorytmu sortowania przez wstawianie */
 template<typename T>
-void Sort::introSort( T data[], int firstIndex, int lastIndex, int maxDepth )
+void Sort::insertionSort(T *tab, int leftIndex, int rightIndex)
 {
-    if ( firstIndex < lastIndex )
-    {
-        if ( !maxDepth )
+	for (int i = leftIndex + 1; i <= rightIndex; i++)
+	{
+		int key = tab[i];
+		int j = i;
+
+		while (j > leftIndex && tab[j - 1] > key)
         {
-            heapSort( data,lastIndex );
-            return;
+            tab[j] = tab[j - 1];
+            j--;
         }
-        int border = partitionArray( data, firstIndex, lastIndex);
-        introSort( data, firstIndex, border-1, maxDepth-1 );
-        introSort( data, border+1, lastIndex, maxDepth-1 );
-    }
+		tab[j] = key;
+	}
 }
 
-/*implementacja sortowania przez wstawanie*/
+/*implementacja algorytmu wstpenego sortowania introspektywnego */ 
 template<typename T>
-void Sort::insertionSort (T data[], int length)
+void Sort::introSortUtil(T data [],T *begin,T *end,int depthLimit)
 {
-    /*zmienne potrzebne do obslugi algorytmu */
-    int i, j;
-    T tmp;
-    for (i=1; i<length; i++)
+    int size = end - begin;
+    if (size < 16)
     {
-        tmp=data[i];
-        for (j=i; j>0 && tmp<data[j-1]; j--)
-            data[j]=data[j-1];
-
-        data[j]=tmp;
+        insertionSort(data,begin - data, end - data);
+        return;
     }
+    if(depthLimit == 0)
+    {
+        heapSort(data,size+1);
+        return;
+    }
+    int pivot = partitionArray(data, begin - data, end - data);
+    introSortUtil(data, begin , data + pivot-1, depthLimit-1);
+    introSortUtil(data, data+pivot+1, end , depthLimit - 1);
 }
 
-
+/*implementacja algorytmu sortowania introspektywnego */
+template<typename T>
+void Sort::introSort(T data[],T *leftIndex,T *rightIndex)
+{
+    int depthLimit = 2 * log(rightIndex-leftIndex);
+    introSortUtil(data,leftIndex,rightIndex,depthLimit);
+    return;
+}
 #endif

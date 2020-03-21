@@ -18,7 +18,6 @@ int main()
         tab[i] = new int[length];
 
 
-
     /*tworzymy menu do wybierania konkretnej tablicy*/
     int choice_array = 0;
     std::cout << "Wybierz rodzaj tablicy ktora chcesz posorotowac: " << std::endl;
@@ -141,17 +140,11 @@ int main()
         }
         case 3:
         {
-            int n = sizeof(tab[0]) / sizeof(tab[0]);
-            // pobierz maximum depth
-	        int maxdepth = log(n) * 2;
             /*czas przed sorotwaniem algorytmu */
             auto time_start = std::chrono::high_resolution_clock::now();
              for(int i = 0; i < SIZE; i++)
              {
-                int n = sizeof(tab[i]) / sizeof(tab[i]);
-                // pobierz maximum depth
-	            int maxdepth = log(n) * 2; 
-                Sort::introSort(tab[i],0,length,maxdepth);
+               Sort::introSort(tab[i], tab[i], tab[i]+length-1); 
              }
             /*czas po sortowaniu algorytmu*/
             auto time_end = std::chrono::high_resolution_clock::now(); 
