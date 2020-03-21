@@ -1,6 +1,6 @@
 #ifndef introsort_hpp
 #define introsort_hpp
-#define SIZE 100000
+#define SIZE 100
 #include <iostream>
 #include <cstdlib>
 #include <ctime>

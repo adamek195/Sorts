@@ -25,7 +25,7 @@ class Sort
     /*definicja algorytmu sortowanie przez wstawianie */
     template<typename T>
     static void insertionSort(T *tab, int leftIndex, int rightIndex);
-    /*definicja funckji wypeniajace dwa elementy tablicy wedlug indeksu */
+    /*definicja wstepnej funkcji do sortowania introspektywnego */
     template<typename T>
     static void introSortUtil(T data[], T * begin, T * end, int depthLimit);    
     /*definicja algorytmu introspektywnego*/
