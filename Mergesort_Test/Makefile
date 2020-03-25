@@ -4,5 +4,5 @@ all: main.o mergesort.o
 main.o: main.cpp
 	g++ -c main.cpp
  
-quicksort.o: mergesort.cpp
+mergesort.o: mergesort.cpp
 	g++ -c mergesort.cpp

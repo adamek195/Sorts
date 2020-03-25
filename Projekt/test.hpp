@@ -48,7 +48,7 @@ void sortAray_percent(T *data,int length,double perCent)
     /*dlugosc tablicy ktorej procent chcemy posortowac */
     int lengthPercent = perCent*length;
      /*w celu posortowania tablicy uzyjemy algorytmu quicksort ktory jest najszybszy */
-    Sort::quickSort(data,0,lengthPercent-1);
+    Sort<T>::quickSort(data,0,lengthPercent-1);
     for(int i = lengthPercent-1; i < length; i++)
     {
         if(data[i] < data[lengthPercent-1])
@@ -72,7 +72,7 @@ void sortAray_percentSecond(T *data,int length,double perCent)
     for(int i = 0; i  < lengthPercent; i++)
         tmp[i] = data[i];  
     /*w celu posortowania tablicy uzyjemy algorytmu quicksort ktory jest najszybszy */
-    Sort::quickSort(tmp,0,lengthPercent-1);  
+    Sort<T>::quickSort(tmp,0,lengthPercent-1);  
     /*posrtowane czesc tablicy przypisze sie calej tablicy*/
     for(int i = 0 ; i < lengthPercent; i++)
         data[i] = tmp[i];  

@@ -56,7 +56,7 @@ int main()
             fillAray_random(tab,length);
             /*Najpierw ja sortujemy */
             for(int i = 0; i < SIZE; i++)
-                Sort::quickSort(tab[i],0,length-1);
+                Sort<int>::quickSort(tab[i],0,length-1);
             /*Posortowana tablice odwracamy*/    
             for(int i = 0; i < SIZE; i++)    
                 fillAray_reverse(tab[i],length);    
@@ -90,7 +90,7 @@ int main()
             /*czas przed sorotwaniem algorytmu */
             auto time_start = std::chrono::high_resolution_clock::now();
             for(int i = 0; i < SIZE; i++)
-                Sort::quickSort(tab[i],0,length-1);
+                Sort<int>::quickSort(tab[i],0,length-1);
              /*czas po sortowaniu algorytmu*/
             auto time_end = std::chrono::high_resolution_clock::now();   
 
@@ -116,7 +116,7 @@ int main()
             /*czas przed sorotwaniem algorytmu */
             auto time_start = std::chrono::high_resolution_clock::now();
             for(int i = 0; i < SIZE; i++)
-                Sort::mergeSort(tab[i],extraArray,0,length-1);
+                Sort<int>::mergeSort(tab[i],extraArray,0,length-1);
             /*czas po sortowaniu algorytmu*/
             auto time_end = std::chrono::high_resolution_clock::now();
 
@@ -144,7 +144,7 @@ int main()
             auto time_start = std::chrono::high_resolution_clock::now();
              for(int i = 0; i < SIZE; i++)
              {
-               Sort::introSort(tab[i], tab[i], tab[i]+length-1); 
+               Sort<int>::introSort(tab[i], tab[i], tab[i]+length-1); 
              }
             /*czas po sortowaniu algorytmu*/
             auto time_end = std::chrono::high_resolution_clock::now(); 
@@ -184,3 +184,4 @@ int main()
 
     return 0;
 }
+
