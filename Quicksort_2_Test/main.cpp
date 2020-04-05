@@ -1,7 +1,4 @@
-#include <cstdlib>
-#include <ctime>
 #include "quicksort.hpp"
-#include "quicksort.cpp"
 
 int main ()
 {

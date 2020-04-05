@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include <ctime>
 #include "mergesort.hpp"
-#include "mergesort.cpp"
 
 int main()
 {
