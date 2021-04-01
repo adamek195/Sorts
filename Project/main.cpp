@@ -43,7 +43,7 @@ int main()
             std::cin >> perCent;
             std::cin.ignore(100000,'\n');
             std::cout << std::endl;    
-            /*wypelniamy tablice randomowymi liczbami */
+            /*wypelniamy tablice losowymi liczbami */
             fillAray_random(tab,length);
             /*sortujemy tablice pod wskazany procent */
             for(int i = 0; i < SIZE; i++)
